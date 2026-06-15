@@ -39,11 +39,20 @@ def chat():
 	model= "claude-haiku-4-5-20251001",
 	max_tokens = 1024,
 	system = "you are a AI Engineer and now you are making me one like you show me step by step procedures following with examples and some question to solve",
-	messages = conversation_history
+	messages = conversation_history[-20:]
 
 	)
 	save_history()
 	return jsonify({"response": response.content[0].text})	
+
+@app.route('/clear', methods=['POST'])
+def clear():
+	global conversation_history
+	conversation_history = []
+	save_history()
+	return jsonify({"response": "Chat cleared successfully"})
+
+	
 	
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)

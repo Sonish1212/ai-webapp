@@ -33,6 +33,7 @@
         <div class="input-area">
             <input type="text" id="userInput" placeholder="Ask me anything..." />
             <button onclick="sendMessage()">Send</button>
+	    <button onclick="clearChat()" style="background: #e74c3c;">Clear</button>
         </div>
     </div>
 
@@ -67,6 +68,15 @@
             const data = await response.json();
             addMessage(data.response, 'assistant');
         }
+	async function clearChat(){
+
+	    const response = await fetch('/clear', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            });
+	document.getElementById('chatbox').innerHTML = '';
+
+}
 
         function addMessage(text, sender) {
             const chatbox = document.getElementById('chatbox');
