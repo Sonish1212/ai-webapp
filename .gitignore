@@ -1,0 +1,7 @@
+.env
+ history.json
+__pycache__
+api.txt
+practice.py
+practice2.py
+practice3.py
